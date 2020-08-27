@@ -10,7 +10,7 @@ table = dynamodb.Table(os.environ['databaseName'])
 
 
 def increment_visit(counter):
-
+    #Add item to rable and return
     response =  table.update_item(
         Key={
           'SourceIP': counter
@@ -24,9 +24,9 @@ def increment_visit(counter):
 
     return response
 
-
 def lambda_handler(event, context):
     data = json.loads(event["body"])
+
     update_item = increment_visit(data['Website'])
 
     # Create api response object
@@ -39,7 +39,7 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Methods': 'POST'
         },
         "body": json.dumps({
-            'count': int(update_item(['Attribute']['visit_count']))
+            'count': int(update_item['Attributes']['visit_count'])
         })
     }
 
