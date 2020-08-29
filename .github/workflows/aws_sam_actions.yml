@@ -24,8 +24,8 @@ jobs:
         with:
           python-version: "3.7"
       - name: Run Test
-        run: pip install boto3 mock && python3 -m pytest test/ -v
-      name: Run Build
-      - run: sam build --use-container
-      name: Run Deploy
-      - run: deploy --no-fail-on-empty-changeset
+        run: pip3 install pytest boto3 moto python-json-logger && python3 -m pytest tests/ -v
+      - name: Run Build
+        run: sam build --use-container
+      - name: Run Deploy
+        run: deploy --no-fail-on-empty-changeset
