@@ -66,7 +66,6 @@ def test_dynamodb(dynamodb):
         'test': '1'
     })
 
-    assert (response)
     response = table.get_item(Key={'test': '1'})
     user = response['Item']
     assert user['test'] == '1'
