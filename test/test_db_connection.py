@@ -6,9 +6,9 @@ from botocore.exceptions import ClientError
 TABLE_NAME = 'TestDataBase'
 
 AWS_CREDENTIALS = {
-    'aws_access_key_id': 'key_id',
-    'aws_secret_access_key': 'access_key',
-    'aws_session_token': 'session_token'
+    'aws_access_key_id': '',
+    'aws_secret_access_key': '',
+    'aws_session_token': ''
 }
 
 
