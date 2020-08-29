@@ -10,7 +10,7 @@ table = dynamodb.Table(os.environ['databaseName'])
 
 
 def increment_visit(counter):
-    #Add item to rable and return
+    #Add item to Table and return
     response =  table.update_item(
         Key={
           'SourceIP': counter
@@ -42,4 +42,3 @@ def lambda_handler(event, context):
             'count': int(update_item['Attributes']['visit_count'])
         })
     }
-

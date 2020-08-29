@@ -1,0 +1,31 @@
+name: Code Challenge SAM Build
+  on:
+    push:
+      branches:
+        - master
+      paths:
+        - "template.yaml"
+        - "Lambda/**"
+        - ".github/workflows/main.yml"
+        - "test/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Config Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
+      - name: Run Test
+        run: pip install boto3 mock && python3 -m pytest test/ -v
+      name: Run Build
+      - run: sam build --use-container
+      name: Run Deploy
+      - run: deploy --no-fail-on-empty-changeset
