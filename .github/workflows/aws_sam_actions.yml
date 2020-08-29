@@ -1,13 +1,13 @@
 name: Code Challenge SAM Build
-  on:
-    push:
-      branches:
-        - master
-      paths:
-        - "template.yaml"
-        - "Lambda/**"
-        - ".github/workflows/main.yml"
-        - "test/**"
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "template.yaml"
+      - "Lambda/**"
+      - ".github/workflows/main.yml"
+      - "test/**"
 
 jobs:
   build:
