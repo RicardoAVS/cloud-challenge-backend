@@ -10,10 +10,11 @@ table = dynamodb.Table(os.environ['databaseName'])
 
 
 def increment_visit(counter):
-    #Add item to Table and return
-    response =  table.update_item(
+
+    # Add item to Table and return
+    response = table.update_item(
         Key={
-          'SourceIP': counter
+            'SourceIP': counter
         },
         UpdateExpression='ADD visit_count :value',
         ExpressionAttributeValues={
@@ -23,6 +24,7 @@ def increment_visit(counter):
     )
 
     return response
+
 
 def lambda_handler(event, context):
     data = json.loads(event["body"])
