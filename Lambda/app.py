@@ -7,6 +7,7 @@ dynamodb = boto3.resource('dynamodb')
 
 # Set dynamodb table name variable from env
 table = dynamodb.Table(os.environ['databaseName'])
+print(os.environ['databaseName'])
 
 
 def increment_visit(counter):

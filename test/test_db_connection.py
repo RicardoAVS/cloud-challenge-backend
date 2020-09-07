@@ -178,8 +178,8 @@ def test_dynamodb_setup():
             **test_event
         }
 
-        ret = lambda_handler(test_body, "")
-        return ret
+        res = lambda_handler(test_body, "")
+        return res
 
 
 @pytest.fixture()
@@ -191,6 +191,6 @@ def test_lambda_api(environment_variables):
         'test_type': int
     }
 
-    ret = test_dynamodb_setup()
+    res = test_dynamodb_setup()
 
-    assert ret["statusCode"] == test_status_code["status_code"]
+    assert res["statusCode"] == test_status_code["status_code"]
