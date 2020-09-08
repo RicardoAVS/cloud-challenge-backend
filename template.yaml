@@ -37,7 +37,7 @@ Resources:
             Method: post
       Environment:
         Variables:
-          databaseName: 'VisitCounter'
+          databaseName: !Ref MyTable
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref MyTable
