@@ -149,7 +149,7 @@ def environment_variables(monkeypatch):
 
 
 @mock_dynamodb2
-def test_dynamodb_setup():
+def dynamodb_setup():
     with mock_dynamodb2():
         dynamodb = boto3.resource('dynamodb', AWS_REGION)
         dynamodb.create_table(
@@ -171,18 +171,16 @@ def test_dynamodb_setup():
             }
         )
 
-        from Lambda.app import lambda_handler
-
         test_body = {
             'body': '{\"Website\": \"Test\"}',
             **test_event
         }
+        from Lambda.app import lambda_handler
 
         res = lambda_handler(test_body, "")
         return res
 
 
-@pytest.fixture()
 def test_lambda_api(environment_variables):
 
     test_status_code = {
@@ -191,6 +189,6 @@ def test_lambda_api(environment_variables):
         'test_type': int
     }
 
-    res = test_dynamodb_setup()
+    res = dynamodb_setup()
 
     assert res["statusCode"] == test_status_code["status_code"]
