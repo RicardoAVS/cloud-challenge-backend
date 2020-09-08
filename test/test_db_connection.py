@@ -3,7 +3,7 @@ import pytest
 from moto import mock_dynamodb2
 
 AWS_REGION = 'us-east-1'
-databaseName = 'TestTable'
+databaseName = 'VisitCounter'
 
 test_event = {
     "resource": "/visitors",
