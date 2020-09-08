@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@v1
         env:
           databaseName: TestTableName
-
       - name: Config Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
