@@ -14,6 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: set environment variables
+        uses: allenevans/set-env@v1.0.0
+        with:
+          databaseName: 'TestTableName'
       - name: Config Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
