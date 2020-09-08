@@ -6,7 +6,7 @@ on:
     paths:
       - "template.yaml"
       - "Lambda/**"
-      - ".github/workflows/main.yml"
+      - ".github/workflows/aws_sam_actions.yml"
       - "test/**"
 
 jobs:
