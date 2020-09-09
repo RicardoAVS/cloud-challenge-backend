@@ -1,9 +1,10 @@
 import boto3
 import pytest
+import os
 from moto import mock_dynamodb2
 
 AWS_REGION = 'us-east-1'
-databaseName = 'VisitCounter'
+databaseName = 'TestTable'
 
 test_event = {
     "resource": "/visitors",
@@ -26,7 +27,6 @@ test_event = {
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "cross-site",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
         "Via": "2.0 0114bca509b46f77e118f6ce3220e769.cloudfront.net (CloudFront)",
         "X-Amz-Cf-Id": "EBwx0Tt-SYmMBxDYQCPEZcCeGU4bhZEXmNwjgdVNuYlgTazz6q-Kag==",
         "X-Amzn-Trace-Id": "Root=1-5f467f37-0f7a040c220cbe747d187fac",
@@ -83,9 +83,6 @@ test_event = {
         "sec-fetch-site": [
             "cross-site"
         ],
-        "User-Agent": [
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36"
-        ],
         "Via": [
             "2.0 0114bca509b46f77e118f6ce3220e769.cloudfront.net (CloudFront)"
         ],
@@ -133,7 +130,6 @@ test_event = {
             "cognitoAuthenticationType": "None",
             "cognitoAuthenticationProvider": "None",
             "userArn": "None",
-            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
             "user": "None"
         },
         "domainName": "zweaywp9rg.execute-api.us-east-1.amazonaws.com",
@@ -142,7 +138,7 @@ test_event = {
 }
 
 
-@pytest.fixture
+@pytest.fixture()
 def environment_variables(monkeypatch):
     monkeypatch.setenv("AWS_REGION", AWS_REGION)
     monkeypatch.setenv("databaseName", databaseName)
@@ -151,6 +147,7 @@ def environment_variables(monkeypatch):
 @mock_dynamodb2
 def dynamodb_setup():
     with mock_dynamodb2():
+
         dynamodb = boto3.resource('dynamodb', AWS_REGION)
         dynamodb.create_table(
             TableName=databaseName,
@@ -188,7 +185,7 @@ def test_lambda_api(environment_variables):
         'test_key': 'count',
         'test_type': int
     }
-
+    
     res = dynamodb_setup()
 
     assert res["statusCode"] == test_status_code["status_code"]
