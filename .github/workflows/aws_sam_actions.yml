@@ -29,4 +29,4 @@ jobs:
       - name: Run Build
         run: sam build --use-container
       - name: Run Deploy
-        run: sam deploy --no-fail-on-empty-changeset
+        run: sam deploy --stack-name my-sam-app --no-fail-on-empty-changeset
