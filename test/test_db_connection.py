@@ -21,50 +21,17 @@ test_event = {
         "CloudFront-Viewer-Country": "CO",
         "content-type": "application/json",
         "Host": "zweaywp9rg.execute-api.us-east-1.amazonaws.com",
-        "origin": "191.95.153.33",
-        "Referer": "http://software-student.me/",
+        "origin": "127.0.0.1",
+        "Referer": "",
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "cross-site",
         "Via": "2.0 0114bca509b46f77e118f6ce3220e769.cloudfront.net (CloudFront)",
         "X-Amz-Cf-Id": "EBwx0Tt-SYmMBxDYQCPEZcCeGU4bhZEXmNwjgdVNuYlgTazz6q-Kag==",
         "X-Amzn-Trace-Id": "Root=1-5f467f37-0f7a040c220cbe747d187fac",
-        "X-Forwarded-For": "191.95.153.33, 64.252.186.79",
+        "X-Forwarded-For": "`127.0.0.1, target.ip.address",
         "X-Forwarded-Port": "443",
         "X-Forwarded-Proto": "https"
-    },
-    "queryStringParameters": "None",
-    "multiValueQueryStringParameters": "None",
-    "pathParameters": "None",
-    "stageVariables": "None",
-    "requestContext": {
-        "resourceId": "8j9yaf",
-        "resourcePath": "/visitors",
-        "httpMethod": "POST",
-        "extendedRequestId": "R4jQuE9woAMFflA=",
-        "requestTime": "26/Aug/2020:15:26:47 +0000",
-        "path": "/Prod/visitors",
-        "accountId": "722486161107",
-        "protocol": "HTTP/1.1",
-        "stage": "Prod",
-        "domainPrefix": "zweaywp9rg",
-        "requestTimeEpoch": 1598455607709,
-        "requestId": "3f43b0d8-2412-4848-8604-c9cfb86dc713",
-        "identity": {
-            "cognitoIdentityPoolId": "None",
-            "accountId": "None",
-            "cognitoIdentityId": "None",
-            "caller": "None",
-            "sourceIp": "191.95.153.33",
-            "principalOrgId": "None",
-            "accessKey": "None",
-            "cognitoAuthenticationType": "None",
-            "cognitoAuthenticationProvider": "None",
-            "userArn": "None",
-            "user": "None"
-        },
-        "domainName": "zweaywp9rg.execute-api.us-east-1.amazonaws.com",
-        "apiId": "zweaywp9rg"
     }
 }
 
@@ -79,7 +46,7 @@ def environment_variables(monkeypatch):
 def dynamodb_setup():
     with mock_dynamodb2():
 
-        dynamodb = boto3.client('dynamodb', AWS_REGION)
+        dynamodb = boto3.resource('dynamodb', AWS_REGION)
         dynamodb.create_table(
             TableName=databaseName,
             KeySchema=[
