@@ -23,7 +23,7 @@ jobs:
           aws-region: us-west-1
       - uses: actions/setup-python@v2
         with:
-          python-version: "3.7"
+          python-version: "3.8"
       - name: Run Test
         run: pip3 install pytest boto3 moto && python3 -m pytest test/ -v
       - name: Run Build
