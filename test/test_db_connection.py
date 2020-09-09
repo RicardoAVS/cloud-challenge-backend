@@ -1,4 +1,3 @@
-import boto3
 import pytest
 from moto import mock_dynamodb2
 
@@ -45,7 +44,7 @@ def environment_variables(monkeypatch):
 @mock_dynamodb2
 def dynamodb_setup():
     with mock_dynamodb2():
-
+        import boto3
         dynamodb = boto3.resource('dynamodb', AWS_REGION)
         dynamodb.create_table(
             TableName=databaseName,
