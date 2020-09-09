@@ -138,10 +138,10 @@ test_event = {
 }
 
 
-@pytest.fixture()
-def environment_variables(monkeypatch):
-    monkeypatch.setenv("AWS_REGION", AWS_REGION)
-    monkeypatch.setenv("databaseName", databaseName)
+# @pytest.fixture()
+# def environment_variables(monkeypatch):
+#     monkeypatch.setenv("AWS_REGION", AWS_REGION)
+#     monkeypatch.setenv("databaseName", databaseName)
 
 
 @mock_dynamodb2
@@ -178,14 +178,16 @@ def dynamodb_setup():
         return res
 
 
-def test_lambda_api(environment_variables):
+def test_lambda_api(monkeypatch):
+    monkeypatch.setenv("AWS_REGION", AWS_REGION)
+    monkeypatch.setenv("databaseName", databaseName)
 
     test_status_code = {
         'status_code': 200,
         'test_key': 'count',
         'test_type': int
     }
-    
+
     res = dynamodb_setup()
 
     assert res["statusCode"] == test_status_code["status_code"]
