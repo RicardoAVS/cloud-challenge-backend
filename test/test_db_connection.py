@@ -1,6 +1,5 @@
 import boto3
 import pytest
-import os
 from moto import mock_dynamodb2
 
 AWS_REGION = 'us-east-1'
@@ -138,10 +137,10 @@ test_event = {
 }
 
 
-# @pytest.fixture()
-# def environment_variables(monkeypatch):
-#     monkeypatch.setenv("AWS_REGION", AWS_REGION)
-#     monkeypatch.setenv("databaseName", databaseName)
+@pytest.fixture()
+def environment_variables(monkeypatch):
+    monkeypatch.setenv("AWS_REGION", AWS_REGION)
+    monkeypatch.setenv("databaseName", databaseName)
 
 
 @mock_dynamodb2
@@ -178,9 +177,7 @@ def dynamodb_setup():
         return res
 
 
-def test_lambda_api(monkeypatch):
-    monkeypatch.setenv("AWS_REGION", AWS_REGION)
-    monkeypatch.setenv("databaseName", databaseName)
+def test_lambda_api(environment_variables):
 
     test_status_code = {
         'status_code': 200,

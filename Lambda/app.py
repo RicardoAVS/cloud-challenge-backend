@@ -10,7 +10,8 @@ table = dynamodb.Table(os.environ['databaseName'])
 
 
 def increment_visit(counter):
-
+    print(os.environ['databaseName'])
+    print(table)
     # Add item to Table and return
     response = table.update_item(
         Key={
