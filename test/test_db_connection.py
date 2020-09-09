@@ -79,7 +79,7 @@ def environment_variables(monkeypatch):
 def dynamodb_setup():
     with mock_dynamodb2():
 
-        dynamodb = boto3.resource('dynamodb', AWS_REGION)
+        dynamodb = boto3.client('dynamodb', AWS_REGION)
         dynamodb.create_table(
             TableName=databaseName,
             KeySchema=[
