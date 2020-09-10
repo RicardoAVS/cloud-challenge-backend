@@ -3,7 +3,7 @@ import pytest
 from moto import mock_dynamodb2
 
 AWS_REGION = 'us-east-1'
-databaseName = 'TestTable'
+TABLE_NAME = 'TestTable'
 
 test_event = {
     "resource": "/visitors",
@@ -39,7 +39,7 @@ test_event = {
 @pytest.fixture()
 def environment_variables(monkeypatch):
     monkeypatch.setenv("AWS_REGION", AWS_REGION)
-    monkeypatch.setenv("databaseName", databaseName)
+    monkeypatch.setenv("databaseName", TABLE_NAME)
 
 
 @mock_dynamodb2
@@ -48,7 +48,7 @@ def dynamodb_setup():
 
         dynamodb = boto3.resource('dynamodb', AWS_REGION)
         dynamodb.create_table(
-            TableName=databaseName,
+            TableName=TABLE_NAME,
             KeySchema=[
                 {
                     "AttributeName": "SourceIP",
