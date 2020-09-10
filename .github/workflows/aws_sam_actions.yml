@@ -29,4 +29,4 @@ jobs:
       - name: Run Build
         run: sam build --use-container
       - name: Run Deploy
-        run: yes | sam deploy --stack-name my-sam-app --region ${{ secrets.AWS_DEFAULT_REGION }} --capabilities CAPABILITY_IAM
+        run: yes | sam deploy --stack-name my-sam-app --region ${{ secrets.AWS_DEFAULT_REGION }} --capabilities CAPABILITY_IAM --no-fail-on-empty-changeset
